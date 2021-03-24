@@ -26,6 +26,18 @@
         <th>No_Handphone</th>
         <th width="280px">Action</th>
     </tr>
+
+    <form action="{{ url()->current() }}">
+        <div class="col-md-11">
+            <input type="text" name="keyword" class="form-control" placeholder="Search users...">
+        </div>
+        <div class="col-md-1">
+            <button type="submit" class="btn btn-primary">
+                Search
+            </button>
+        </div>
+    </form>
+
     @foreach ($mahasiswas as $Mahasiswa)
     <tr>
 
@@ -47,4 +59,7 @@
     </tr>
     @endforeach
 </table>
+<div class="d-flex">
+    {{ $mahasiswas->links() }}
+</div>
 @endsection
