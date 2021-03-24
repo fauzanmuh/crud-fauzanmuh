@@ -24,21 +24,12 @@
         <th>Kelas</th>
         <th>Jurusan</th>
         <th>No_Handphone</th>
+        <th>Email</th>
+        <th>Tanggal Lahir</th>
         <th width="280px">Action</th>
     </tr>
 
-    <form action="{{ url()->current() }}">
-        <div class="col-md-11">
-            <input type="text" name="keyword" class="form-control" placeholder="Search users...">
-        </div>
-        <div class="col-md-1">
-            <button type="submit" class="btn btn-primary">
-                Search
-            </button>
-        </div>
-    </form>
-
-    @foreach ($mahasiswas as $Mahasiswa)
+    @foreach ($paginatedMahasiswas as $Mahasiswa)
     <tr>
 
         <td>{{ $Mahasiswa->Nim }}</td>
@@ -46,6 +37,8 @@
         <td>{{ $Mahasiswa->Kelas }}</td>
         <td>{{ $Mahasiswa->Jurusan }}</td>
         <td>{{ $Mahasiswa->No_Handphone }}</td>
+        <td>{{$Mahasiswa->email}}</td>
+        <td>{{isset($Mahasiswa->tanggal_lahir) ? \Carbon\Carbon::parse($Mahasiswa->tanggal_lahir)->toFormattedDateString() : ''}}</td>
         <td>
             <form action="{{ route('mahasiswas.destroy',$Mahasiswa->Nim) }}" method="POST">
 
@@ -60,6 +53,6 @@
     @endforeach
 </table>
 <div class="d-flex">
-    {{ $mahasiswas->links() }}
+    {{ $paginatedMahasiswas->links('pagination::bootstrap-4') }}
 </div>
 @endsection

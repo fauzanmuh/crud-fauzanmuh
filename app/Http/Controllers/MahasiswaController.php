@@ -17,7 +17,7 @@ class MahasiswaController extends Controller
         //fungsi eloquent menampilkan data menggunakan pagination
         $mahasiswas = Mahasiswa::all(); // Mengambil semua isi tabel
         $paginatedMahasiswas = Mahasiswa::orderBy('nim', 'desc')->paginate(5);
-        return view('mahasiswa.index', compact('mahasiswas', 'paginatedMahasiswas'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('mahasiswas.index', compact('mahasiswas', 'paginatedMahasiswas'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
     
     public function create()
@@ -34,6 +34,8 @@ class MahasiswaController extends Controller
         'Kelas' => 'required',
         'Jurusan' => 'required',
         'No_Handphone' => 'required',
+        'email' => 'required|email',
+        'tanggal_lahir' => 'required|date'
         ]);
         
         //fungsi eloquent untuk menambah data
@@ -53,7 +55,7 @@ class MahasiswaController extends Controller
         $next = Mahasiswa::where('nim', '<', $Nim)->orderBy('nim','desc')->first();
         $prev = Mahasiswa::where('nim', '>', $Nim)->orderBy('nim')->first();
 
-        return view('mahasiswa.detail', compact('mahasiswa', 'prev', 'next'));
+        return view('mahasiswas.detail', compact('Mahasiswa', 'prev', 'next'));
     }
 
     public function edit($Nim)
@@ -72,6 +74,8 @@ class MahasiswaController extends Controller
             'Kelas' => 'required',
             'Jurusan' => 'required',
             'No_Handphone' => 'required',
+            'email' => 'required|email',
+            'tanggal_lahir' => 'required|date'
         ]);
 
         //fungsi eloquent untuk mengupdate data inputan kita
