@@ -11,6 +11,19 @@
     </div>
 </div>
 
+<div class="row justify-content-end">
+    <div class="col-md-4">
+        <form action="{{ route('mahasiswas.index') }}" accept-charset="UTF-8" method="get">
+            <div class="input-group">
+                <input type="text" name="search" id="search" placeholder="Cari..." class="form-control">
+                <span class="input-group-btn">
+                    <input type="submit" value="Cari" class="btn btn-primary">
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
     <p>{{ $message }}</p>
@@ -29,7 +42,7 @@
         <th width="280px">Action</th>
     </tr>
 
-    @foreach ($paginatedMahasiswas as $Mahasiswa)
+    @foreach ($mahasiswas as $Mahasiswa)
     <tr>
 
         <td>{{ $Mahasiswa->Nim }}</td>
@@ -53,6 +66,6 @@
     @endforeach
 </table>
 <div class="d-flex">
-    {{ $paginatedMahasiswas->links('pagination::bootstrap-4') }}
+    {{ $mahasiswas->links('pagination::bootstrap-4') }}
 </div>
 @endsection
